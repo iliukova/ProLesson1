@@ -26,6 +26,8 @@ class MenuCategory:
         self.name=name
         self.dishes.append(dishes)
 
+
+
 menucategory1 = MenuCategory("Салат")
 menucategory1.dishes.append("САЛАТ З СИРОМ ФЕТА ТА БУРЯКОМ")
 menucategory1.dishes.append("ЦЕЗАР З КУРКОЮ")
