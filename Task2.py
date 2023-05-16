@@ -9,56 +9,64 @@
 # Клас Замовлення: відповідає за збереження списку страв, які замовив клієнт, та їхньої ціни.
 
 class Dish:
-    def __init__(self, name: str, description: str, price: float):
-        self.name = name
-        self.description = description
+    def __init__(self, title, price):
+        self.title = title
         self.price = price
 
     def __str__(self):
-        return f'{self.name}: {self.price:.2f}'
+        return f'{self.title}: {self.price} uah'
 
-class MenuCategory:
-    def __init__(self, name):
-        self.name = name
+
+class Category:
+    def __init__(self, title):
+        self.title = title
         self.dishes = []
 
-    def add_dishes(self, name, dishes):
-        self.name=name
-        self.dishes.append(dishes)
-
-
-
-menucategory1 = MenuCategory("Салат")
-menucategory1.dishes.append("САЛАТ З СИРОМ ФЕТА ТА БУРЯКОМ")
-menucategory1.dishes.append("ЦЕЗАР З КУРКОЮ")
-menucategory1.dishes.append("КАПРЕЗЕ")
-print(menucategory1)
-class Menu:
-    def __init__(self, categories):
-        self.categories = categories
-
-class Order:
-    def __init__(self):
-        self.dishes = []
-        self.quantities = []
-
-    def add_dish(self, dish, quantity=1):
+    def add_dish(self, dish):
         self.dishes.append(dish)
-        self.quantities.append(quantity)
 
     def __str__(self):
-        res = ''
-        for dishes, quantity in zip(self.dishes, self.quantities):
-            res += f'{dishes} x {quantity} = {dishes.price * quantity} грн\n'
-        return res
+        return f"{'*' * 10}{self.title}{'*' * 10}\n" + '\n'.join(map(str, self.dishes))
 
-order = Order()
-d_1 = Dish('САЛАТ З СИРОМ ФЕТА ТА БУРЯКОМ', "Буряк, сир Фета, листя салатів Рукола, Айсберг, Шпинат, чорнослив, яблука, грецькі горіхи, соус Вінегрет", 135)
-d_2 = Dish('ЦЕЗАР З КУРКОЮ', "Курка в соусі Теріякі, салат Ромен, сир Пармезан, бекон, помідори Чері, перепелині яйця, грінки з багету, соус Цезар",  220)
-d_3 = Dish('КАПРЕЗЕ', "Сир Моцарела, помідори, салат Рукола, соус Песто, цитрусова заправка", 210)
 
-order.add_dish(d_1)
-order.add_dish(d_2, 3)
-order.add_dish(d_3, 2)
+class Menu:
+    def __init__(self):
+        self.categories = []
 
-print(order)
+    def add_category(self, category):
+        self.categories.append(category)
+
+    def __str__(self):
+        return '\n'.join(map(str, self.categories))
+
+
+dish_1 = Dish('Страва 1', 100)
+dish_2 = Dish('Страва 2', 101)
+dish_3 = Dish('Страва 3', 102)
+dish_4 = Dish('Страва 4', 103)
+dish_5 = Dish('Страва 5', 104)
+dish_6 = Dish('Страва 6', 105)
+dish_7 = Dish('Страва 7', 106)
+dish_8 = Dish('Страва 8', 107)
+dish_9 = Dish('Страва 9', 108)
+dish_10 = Dish('Страва 10', 109)
+
+cat_1 = Category('Основні страви')
+cat_1.add_dish(dish_1)
+cat_1.add_dish(dish_2)
+cat_1.add_dish(dish_3)
+cat_1.add_dish(dish_4)
+cat_1.add_dish(dish_5)
+
+cat_2 = Category('Перші страви')
+cat_2.add_dish(dish_6)
+cat_2.add_dish(dish_7)
+cat_2.add_dish(dish_8)
+cat_2.add_dish(dish_9)
+cat_2.add_dish(dish_10)
+
+menu = Menu()
+menu.add_category(cat_1)
+menu.add_category(cat_2)
+
+print(menu)
